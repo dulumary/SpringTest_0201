@@ -10,7 +10,7 @@ public class RealEstate {
 	private int area;
 	private String type;
 	private int price;
-	private int rentPrice;
+	private Integer rentPrice;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -51,10 +51,10 @@ public class RealEstate {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getRentPrice() {
+	public Integer getRentPrice() {
 		return rentPrice;
 	}
-	public void setRentPrice(int rentPrice) {
+	public void setRentPrice(Integer rentPrice) {
 		this.rentPrice = rentPrice;
 	}
 	public Date getCreatedAt() {
