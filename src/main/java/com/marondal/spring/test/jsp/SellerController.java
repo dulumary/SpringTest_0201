@@ -38,15 +38,22 @@ public class SellerController {
 	}
 	
 	@GetMapping("/info")
-	public String sellerInfo(Model model) {
+	public String sellerInfo(
+			@RequestParam(value="id", required=false) Integer id
+			, Model model) {
 		
-		Seller seller = sellerService.getLastSeller();
+		Seller seller = null;
+		// id가 전달되면, 일치하는 판매자 정보 
+		if(id != null) {
+			seller = sellerService.getSeller(id);
+		} else { // id가 전달되지 않으면, 가장 최근 등록된 판매자 정보			
+			seller = sellerService.getLastSeller();
+		}
 		
 		model.addAttribute("seller", seller);
-		
 		return "jsp/sellerInfo";
 	}
-	
+
 	
 
 }
