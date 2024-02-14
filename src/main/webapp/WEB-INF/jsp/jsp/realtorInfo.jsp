@@ -10,26 +10,26 @@
 <body>
 		<div class="container">
 	
-		<table class="table">
+		<table class="table text-center">
 			<tr>
 				<td>id</td>
-				<td>125354</td>
+				<td>${realtor.id }</td>
 			</tr>
 			<tr>
 				<td>상호명</td>
-				<td>서초공인중개사</td>
+				<td>${realtor.office }</td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td>02-1234-5678</td>
+				<td>${realtor.phoneNumber }</td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td>서울시 서초구</td>
+				<td>${realtor.address }</td>
 			</tr>
 			<tr>
 				<td>등급</td>
-				<td>안심중개사</td>
+				<td>${realtor.grade }</td>
 			</tr>
 			
 		</table>

@@ -12,12 +12,12 @@
 	<div class="container">
 		<h1>공인중개사 추가</h1>
 		
-		<form>
-			<label>상호명</label> <input type="text" class="form-control col-6">
-			<label>전화번호</label> <input type="text" class="form-control col-6">
-			<label>주소</label> <input type="text" class="form-control col-6"> 
-			<label>등급 </label><input type="text"  class="form-control col-6" placeholder="안심중개사, 일반중개사, 프리미엄중개사">
-			<button type="button" class="btn btn-primary">추가</button>
+		<form method="get" action="/jsp/realtor/create">
+			<label>상호명</label> <input type="text" class="form-control col-6" name="office">
+			<label>전화번호</label> <input type="text" class="form-control col-6" name="phoneNumber">
+			<label>주소</label> <input type="text" class="form-control col-6" name="address"> 
+			<label>등급 </label><input type="text"  class="form-control col-6" name="grade" placeholder="안심중개사, 일반중개사, 프리미엄중개사">
+			<button type="submit" class="btn btn-primary">추가</button>
 		</form>
 	
 	
