@@ -1,5 +1,6 @@
 package com.marondal.spring.test.jstl.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class WeatherService {
 	}
 	
 	public int addWeather(
-			String  date
+			Date date
 			, String weather
 			, double temperatures
 			, double precipitation
@@ -33,6 +34,11 @@ public class WeatherService {
 		return count;
 	}
 	
+	public int addWeatherByObject(Weather weather) {
+		int count = weatherHistoryRepository.insertWeatherByObject(weather);
+		
+		return count;
+	}
 	
 
 }

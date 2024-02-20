@@ -45,6 +45,30 @@
 	
 	
 	</insert>
+	
+	<insert id="insertWeatherByObject" 
+	parameterType="com.marondal.spring.test.jstl.domain.Weather">
+		INSERT INTO 
+			`weatherhistory`
+		(
+			`weather`
+			, `date`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+		)
+		VALUE 
+		(
+			#{weather}
+			, #{date}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+		)
+	
+	</insert>
 
 
 </mapper>

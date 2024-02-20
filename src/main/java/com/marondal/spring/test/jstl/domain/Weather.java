@@ -2,10 +2,13 @@ package com.marondal.spring.test.jstl.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Weather {
 	
 	private int id;
 	private String weather;
+	@DateTimeFormat(pattern="yyyy년 M월 d일")
 	private Date date;
 	private double temperatures;
 	private double precipitation;
