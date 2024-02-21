@@ -16,5 +16,21 @@
 		FROM 
 			`favorite`
 	</select>
+	
+	<insert id="insertFavorite" parameterType="map">
+		INSERT INTO
+			`favorite`
+		(
+			`name`
+			, `url`
+		)
+		VALUE 
+		(
+			#{name}
+			, #{url}
+		)
+	
+	
+	</insert>
 
 </mapper>

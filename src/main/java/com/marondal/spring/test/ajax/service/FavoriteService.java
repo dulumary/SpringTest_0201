@@ -20,5 +20,10 @@ public class FavoriteService {
 		
 		return favoriteList;
 	}
+	
+	public int addFavorite(String name, String url) {
+		int count = favoriteRepository.insertFavorite(name, url);
+		return count;
+	}
 
 }
