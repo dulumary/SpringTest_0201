@@ -27,7 +27,7 @@
 					<td>${status.count }</td>
 					<td>${favorite.name }</td>
 					<td>${favorite.url }</td>
-					<td><button type="button" class="btn btn-danger btn-sm delete-btn">삭제</button></td>
+					<td><button type="button" data-favorite-id="${favorite.id }" class="btn btn-danger btn-sm delete-btn">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -43,13 +43,29 @@
 	$(document).ready(function() {
 		$(".delete-btn").on("click", function() {
 			
-			// 삭제 대상 id 얻어 오기 
-			// $(this)
+			// 버튼 태그에 삭제 대상 id 속성이 부여된 상태 data-favorite-id
+			// 이벤트가 발생한 그 버튼 태그의 data-favorite-id 속성 값을 가져온다. 
+			// 삭제 대상의 id를 얻어 올 수 있다. 
+			let favoriteId = $(this).data("favorite-id");
+			
 			
 			$.ajax({
 				type:"get"
 				, url:"/ajax/favorite/delete"
-				, data:{"id":????}
+				, data:{"id":favoriteId}
+				, success:function(data) {
+					// 성공 : {"result":"success"}
+					// 실패 : {"result":"fail"}
+					if(data.result == "success") {
+						// 새로고침
+						location.reload();
+					} else {
+						alert("삭제 실패");
+					}
+				}
+				, error:function() {
+					alert("삭제 에러");
+				}
 			});
 			
 		}); 
