@@ -41,11 +41,11 @@
                         <div class="member-input mt-3" id="member">
                             <div class="input-gorup form-inline">
                                 <label class="input-label">이름 :</label>
-                                <input type="text" class="form-control text-input">
+                                <input type="text" class="form-control text-input" id="nameInput">
                             </div>
                             <div class="input-gorup form-inline mt-3">
                                 <label class="input-label">전화번호 :</label>
-                                <input type="password" class="form-control text-input">
+                                <input type="text" class="form-control text-input" id="phoneNumberInput">
                             </div>
 
                         </div>
@@ -82,7 +82,44 @@
 
     <script>
         $(document).ready(function() {
- 
+ 			$("#lookupBtn").on("click", function() {
+ 				let name = $("#nameInput").val();
+ 				let phoneNumber = $("#phoneNumberInput").val();
+ 				
+ 				if(name == "") {
+ 					alert("이름을 입력하세요");
+ 					return ;
+ 				}
+ 				
+ 				if(phoneNumber == "") {
+ 					alert("전화번호를 입력하세요");
+ 					return ;
+ 				}
+ 				
+ 				$.ajax({
+ 					type:"get"
+ 					, url:"/ajax/booking/search"
+ 					, data:{"name":name, "phoneNumber":phoneNumber}
+ 				 	, success:function(data) {
+ 				 		
+ 				 		if(data.result == "fail") {
+ 				 			alert("조회결과가 없습니다");
+ 				 		} else {
+ 				 			alert("이름 : " + data.booking.name 
+ 	 				 				+ "\n날짜 : " + data.booking.date 
+ 	 				 				+ "\n일수 : " + data.booking.day
+ 	 				 				+ "\n인원 : " + data.booking.headcount
+ 	 				 				+ "\n상태 : " + data.booking.state);	
+ 				 		}
+ 				 		
+ 				 		
+ 				 	}
+ 				 	, error:function() {
+ 				 		alert("조회 에러!");
+ 				 	}
+ 					
+ 				});
+ 			});
         } );
     </script>
     </body>

@@ -32,16 +32,16 @@
                 	<h3 class="text-center">예약하기</h3>
                 	<div>
                 		<label class="mt-3">이름</label>
-                		<input type="text" class="form-control">
+                		<input type="text" class="form-control" id="nameInput">
                 		<label class="mt-3">예약날짜</label>
                 		<input type="text" class="form-control" id="dateInput">
                 		<label class="mt-3">숙박일수</label>
-                		<input type="text" class="form-control">
+                		<input type="text" class="form-control" id="dayInput">
                 		<label class="mt-3">숙박인원</label>
-                		<input type="text" class="form-control">
+                		<input type="text" class="form-control" id="headcountInput">
                 		<label class="mt-3">전화번호</label>
-                		<input type="text" class="form-control">
-                		<button type="button" class="btn btn-warning btn-block mt-3">예약하기</button>
+                		<input type="text" class="form-control" id="phoneNumberInput">
+                		<button type="button" id="bookingBtn" class="btn btn-warning btn-block mt-3">예약하기</button>
          
                 	</div>
                 </div>
@@ -67,6 +67,75 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
+        	
+        	$("#bookingBtn").on("click", function() {
+        		
+        		let name = $("#nameInput").val();
+        		let date = $("#dateInput").val();
+        		let day = $("#dayInput").val();
+        		let headcount = $("#headcountInput").val();
+        		let phoneNumber = $("#phoneNumberInput").val();
+        		
+        		if(name == "") {
+        			alert("이름을 입력하세요");
+        			return ;
+        		}
+        		
+        		if(date == "") {
+        			alert("날짜를 선택하세요");
+        			return ;
+        		}
+        		
+        		if(day == "") {
+        			alert("숙발일수를 입력하세요");
+        			return ;
+        		}
+        		
+        		// day 가 숫자가 아닌경우
+        		// Not a Number
+        		if(isNaN(day)) {
+        			alert("숙박일수는 숫자만 입력 가능합니다");
+        			return ;
+        		}
+        		
+        		if(headcount == "") {
+        			alert("숙박인원을 입력하세요");
+        			return ;
+        		}
+        		
+        		if(isNaN(headcount)) {
+        			alert("숙박인원은 숫자만 입력 가능합니다");
+        			return ;
+        		}
+        		
+        		if(phoneNumber == "") {
+        			alert("전화번호를 입력하세요");
+        			return ;
+        		}
+        		
+        		
+        		$.ajax({
+        			type:"get"
+        			, url:"/ajax/booking/create"
+        			, data:{"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber}
+        			, success:function(data) {
+        				// 성공 : {"result":"success"}
+        				// 실패 : {"result":"fail"}
+        				if(data.result == "success") {
+        					location.href = "/ajax/booking/list";
+        				} else {
+        					alert("예약 실패");
+        				}
+        			
+        			}
+        			, error:function() {
+        				alert("예약 에러");
+        			}
+        		});
+        		
+        		
+        	});
+        	
         	
         	$("#dateInput").datepicker({
         		minDate:0

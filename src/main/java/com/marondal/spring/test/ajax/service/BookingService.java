@@ -32,5 +32,18 @@ public class BookingService {
 		
 		return count;
 	}
+	
+	public int deleteBooking(int id) {
+		
+		int count = bookingRepository.deleteBooking(id);
+		return count;
+	}
+	
+	public Booking getBooking(String name, String phoneNumber) {
+		
+		Booking booking = bookingRepository.selectBooking(name, phoneNumber);
+		
+		return booking;
+	}
 
 }

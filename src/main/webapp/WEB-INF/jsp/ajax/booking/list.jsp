@@ -68,7 +68,8 @@
 	                					<td>${booking.state }</td>
 	                				</c:otherwise>
 	                			</c:choose>
-	                			<td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
+	                			<td><button type="button" class="btn btn-danger btn-sm delete-btn" data-booking-id="${booking.id }">삭제</button></td>
+	                			
 	                		</tr>
 	                		</c:forEach>
 	                	
@@ -99,7 +100,33 @@
     <script>
         $(document).ready(function() {
  
+        	$(".delete-btn").on("click", function() {
+        		
+        		// 이벤트가 발생한 버튼의 data-booking-id 값을 얻어 온다. 
+        	 	let id = $(this).data("booking-id");
+        		
+        		$.ajax({
+        			type:"get"
+        			, url:"/ajax/booking/delete"
+        			, data:{"id":id}
+        			, success:function(data) {
+        				// 성공 : {"result":"success"}
+        				// 실패 : {"result":"fail"}
+        				if(data.result == "success") {
+        					location.reload();
+        				} else {
+        					alert("삭제 실패");
+        				}
+        			}
+        			, error:function() {
+        				alert("삭제 에러!");
+        			}
+        		});
+        		
+        		
+        	});
+        	
         } );
-    </script>
+    </script> 
     </body>
 </html>
